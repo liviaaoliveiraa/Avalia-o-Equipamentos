@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllEquipamentos, getEquipamentosById, createEquipamento, deleteEquipamento, updateEquipamento,CategoriasEncontradas } from '../controllers/equipamentosControllers.js';
+import { getAllEquipamentos, getEquipamentosById, createEquipamento, deleteEquipamento, updateEquipamento, } from '../controllers/equipamentosControllers.js';
 
 const router = express.Router()
 

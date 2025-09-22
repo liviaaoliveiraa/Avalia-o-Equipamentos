@@ -4,11 +4,13 @@ const { equipamentos } = dados;
 
 const getAllEquipamentos =(req, res) => {
     let resultado = equipamentos;
-
+ 
     res.status(200).json({
         total:resultado.length,
         data:resultado
     });
+
+
 };
 
 const getEquipamentosById = (req, res) => {
@@ -24,7 +26,7 @@ const getEquipamentosById = (req, res) => {
 
 
 const createEquipamento = (req, res) => {
-    const { nome, categoria, marca, modelo, dataAquisicao, valor, localização } = req.body;
+    const { nome, categoria, marca, modelo, dataAquisicao, valor, localizacao } = req.body;
 
     if (valor <= 0 ){
         return res.status(400).json({
@@ -33,24 +35,24 @@ const createEquipamento = (req, res) => {
         });
     }
  
-    const novoCarro = {
-        id: carros.length + 1,
+    const novoEquipamento = {
+        id: equipamentos.length + 1,
         nome: nome,
         categoria: modelo,
-        marca: cor,
-        modelo: tipo,
-        dataAquisicao: parseInt (ano),
-        valor:valor,
-        localização:localização
+        marca: marca,
+        modelo: modelo,
+        dataAquisicao: parseInt (dataAquisicao),
+        valor:parseInt (valor),
+        localizacao:localizacao
 
     }
 
-    carros.push(novoCarro);
+    equipamentos.push(novoEquipamento);
 
     res.status(200).json({
         success:true,
         message: "Novo equipamento Criado com sucesso!🪛",
-        carros:novoCarro
+        equipamentos:novoEquipamento
     });
 };
 
@@ -63,12 +65,7 @@ const deleteEquipamento = (req, res) => {
             message:"O ID deve ser válido"
         })
     }
-    if(isNaN(dataAquisicao)){
-        return res.status(400).json({
-            success:false,
-            message:"A data deve ser válida"
-        })
-    }
+
 
     const equipamentoParaRemover = equipamentos.find(e => e.id ===id);
 
@@ -108,10 +105,17 @@ const updateEquipamento = (req, res) => {
         success:false,
         message:`O equipamento com o id ${idParaEditar} não existe`
       })
+    };
+
+     if (valor <= 0 ){
+        return res.status(400).json({
+            success:false,
+            message:"O equipamento não pode ser de graça 🙄"
+        });
     }
 
     const equipamentosAtualizados = equipamentos.map(e => e.id === idParaEditar ? {
-        ...equipamento,
+        ... equipamentos,
         ...(nome && { nome }),
         ...(categoria && { categoria }),
         ...(marca && { marca }),
@@ -121,7 +125,8 @@ const updateEquipamento = (req, res) => {
         ...(localizacao && {localizacao})
 
     }
-    :equipamento
+
+    :equipamentos
 
 );
 
