@@ -9,6 +9,17 @@ const getAllEquipamentos =(req, res) => {
         total:resultado.length,
         data:resultado
     });
-}
+};
 
-export { getAllEquipamentos }
+const getEquipamentosById = (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const equipamento = equipamentos.find (e => e.id === id);
+
+    res.status(200).json({
+        total:equipamento.length,
+        equipamento: equipamento
+    })
+};
+
+export { getAllEquipamentos, getEquipamentosById}
