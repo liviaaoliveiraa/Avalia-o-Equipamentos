@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 
 app.use ("/equipamentos", equipamentosRoutes);
 
+
 app.listen(serverPort, () => {
     console.log (`Servidor Funcionando 🚀! http://localhost:${serverPort}`)
 });
